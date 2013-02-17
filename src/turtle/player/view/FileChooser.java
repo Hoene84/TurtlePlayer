@@ -79,7 +79,31 @@ public class FileChooser implements TurtleDatabase.DbObserver
 				  new ArrayList<Instance>(),
 				  listActivity,
 				  false,
-				  InstanceFormatter.SHORT);
+				  InstanceFormatter.SHORT){
+			@Override
+			public boolean isFiltered(Instance instance)
+			{
+				return false;
+			}
+
+			@Override
+			public boolean filter(Instance instance)
+			{
+				return false;  //To change body of implemented methods use File | Settings | File Templates.
+			}
+
+			@Override
+			public boolean isFilter(Instance instance)
+			{
+				return false;  //To change body of implemented methods use File | Settings | File Templates.
+			}
+
+			@Override
+			public boolean isIncluder(Instance instance)
+			{
+				return false;  //To change body of implemented methods use File | Settings | File Templates.
+			}
+		};
 
 		listActivity.setListAdapter(listAdapter);
 

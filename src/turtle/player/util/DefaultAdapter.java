@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import turtle.player.R;
 import turtle.player.model.Instance;
@@ -37,7 +38,7 @@ import java.util.List;
  * Should be created outside the UI Thread, the initial sorting in the constructor can take a long time
  * for big lists.
  */
-public class DefaultAdapter<T extends Instance> extends ArrayAdapter<T>
+public abstract class DefaultAdapter<T extends Instance> extends ArrayAdapter<T>
 {
 	private final List<T> objects;
 	private final Activity activity;
@@ -58,7 +59,7 @@ public class DefaultAdapter<T extends Instance> extends ArrayAdapter<T>
 			  boolean allowsDuplicates,
 			  InstanceFormatter formatter)
 	{
-		super(context, R.layout.file_list_entry, objects);
+		super(context, R.layout.chooser_list_entry, objects);
 		this.activity = startingActivity;
 		this.objects = objects;
 		this.allowsDuplicates = allowsDuplicates;
@@ -115,13 +116,39 @@ public class DefaultAdapter<T extends Instance> extends ArrayAdapter<T>
 	{
 
 		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.file_list_entry, parent, false);
+		View rowView = inflater.inflate(R.layout.chooser_list_entry, parent, false);
 
 		T currObject = getItem(position);
 
 		TextView textView = (TextView) rowView.findViewById(R.id.label);
 		textView.setText(currObject.accept(formatter));
 
+		ImageView icon = (ImageView) rowView.findViewById(R.id.icon);
+		if (isFilter(currObject))
+		{
+			icon.setImageResource(R.drawable.filter48_isfilter);
+		}
+		else if(isIncluder(currObject))
+		{
+			icon.setImageResource(R.drawable.filter48_include);
+		}
+		else if(isFiltered(currObject))
+		{
+			icon.setImageResource(R.drawable.filter48_filtered);
+		}
+		else
+		{
+			icon.setImageResource(R.drawable.filter48_notfiltered);
+		}
+
 		return rowView;
 	}
+
+	public abstract boolean isFiltered(T instance);
+
+	public abstract boolean isFilter(T instance);
+
+	public abstract boolean isIncluder(T instance);
+
+	public abstract boolean filter(T instance);
 }
