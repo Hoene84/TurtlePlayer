@@ -3,6 +3,7 @@ package turtle.player.persistance.turtle.mapping;
 import android.content.ContentValues;
 import turtle.player.model.AlbumArtLocation;
 import turtle.player.model.Track;
+import turtle.player.persistance.framework.creator.Creator;
 import turtle.player.persistance.source.sql.QueryGeneratorTable;
 import turtle.player.persistance.turtle.db.structure.Tables;
 
