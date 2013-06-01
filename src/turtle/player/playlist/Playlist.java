@@ -81,25 +81,9 @@ public class Playlist
 	}
 
 	/**
-	 * @return true if the filter was activated
-	 */
-	public <O> boolean toggleFilter(Filter<? super Tables.Tracks> filter, Track track){
-		if(!filters.contains(filter))
-		{
-			addFilter(filter);
-			return true;
-		}
-		else
-		{
-			removeFilter(filter);
-			return false;
-		}
-	}
-
-	/**
 	 * @return true if the filter was not allready there
 	 */
-	public <O> boolean addFilter(Filter<? super Tables.Tracks> filter){
+	public boolean addFilter(Filter<? super Tables.Tracks> filter){
 		boolean modified = filters.add(filter);
 		if(modified)
 		{
