@@ -1,11 +1,16 @@
 package com.turtleplayer.common;
 
-import com.turtleplayer.persistance.framework.filter.*;
-import com.turtleplayer.persistance.source.relational.FieldPersistable;
-import com.turtleplayer.persistance.source.relational.fieldtype.FieldPersistableAsDouble;
-import com.turtleplayer.persistance.source.relational.fieldtype.FieldPersistableAsInteger;
-import com.turtleplayer.persistance.source.relational.fieldtype.FieldPersistableAsString;
-import com.turtleplayer.persistance.source.relational.fieldtype.FieldVisitor;
+import ch.hoene.perzist.access.filter.FieldFilter;
+import ch.hoene.perzist.access.filter.Filter;
+import ch.hoene.perzist.access.filter.FilterSet;
+import ch.hoene.perzist.access.filter.FilterVisitorGenerified;
+import ch.hoene.perzist.access.filter.NotFilter;
+import ch.hoene.perzist.access.filter.Operator;
+import ch.hoene.perzist.source.relational.FieldPersistable;
+import ch.hoene.perzist.source.relational.fieldtype.FieldPersistableAsDouble;
+import ch.hoene.perzist.source.relational.fieldtype.FieldPersistableAsInteger;
+import ch.hoene.perzist.source.relational.fieldtype.FieldPersistableAsString;
+import ch.hoene.perzist.source.relational.fieldtype.FieldVisitor;
 
 import java.util.regex.Pattern;
 

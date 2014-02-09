@@ -1,8 +1,9 @@
 package com.turtleplayer.persistance.turtle.mapping;
 
 import android.content.ContentValues;
+import ch.hoene.perzist.access.mapping.Mapping;
+import ch.hoene.perzist.source.relational.Table;
 import com.turtleplayer.model.Track;
-import com.turtleplayer.persistance.source.sql.QueryGeneratorTable;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 /**
@@ -22,14 +23,13 @@ import com.turtleplayer.persistance.turtle.db.structure.Tables;
  * @author Simon Honegger (Hoene84)
  */
 
-public class TrackToDbMapper extends QueryGeneratorTable<Track>
+public class TrackToDbMapper implements Mapping<Table, ContentValues, Track>
 {
-	public TrackToDbMapper()
-	{
-		super(Tables.TRACKS);
-	}
+    public Table get() {
+        return Tables.TRACKS;
+    }
 
-	public ContentValues create(Track track)
+    public ContentValues create(Track track)
 	{
 		final ContentValues values = new ContentValues();
 

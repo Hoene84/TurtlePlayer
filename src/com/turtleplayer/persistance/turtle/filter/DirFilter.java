@@ -1,7 +1,9 @@
 package com.turtleplayer.persistance.turtle.filter;
 
+import ch.hoene.perzist.access.filter.FieldFilter;
+import ch.hoene.perzist.access.filter.FilterVisitor;
+import ch.hoene.perzist.access.filter.Operator;
 import com.turtleplayer.model.Track;
-import com.turtleplayer.persistance.framework.filter.*;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 /**

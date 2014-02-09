@@ -1,7 +1,7 @@
 package com.turtleplayer.persistance.turtle.db.structure;
 
-import com.turtleplayer.persistance.source.relational.Field;
-import com.turtleplayer.util.Shorty;
+import ch.hoene.perzist.source.relational.Field;
+import ch.hoene.perzist.util.Shorty;
 
 import java.util.Arrays;
 import java.util.List;

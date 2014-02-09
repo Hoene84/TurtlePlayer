@@ -1,10 +1,10 @@
 package com.turtleplayer.playlist.playorder;
 
+import ch.hoene.perzist.access.executor.OperationExecutor;
+import ch.hoene.perzist.access.sort.RandomOrder;
+import ch.hoene.perzist.android.FirstSqlLite;
+import ch.hoene.perzist.android.QuerySqlite;
 import com.turtleplayer.model.Track;
-import com.turtleplayer.persistance.framework.executor.OperationExecutor;
-import com.turtleplayer.persistance.framework.sort.RandomOrder;
-import com.turtleplayer.persistance.source.sql.First;
-import com.turtleplayer.persistance.source.sqlite.QuerySqlite;
 import com.turtleplayer.persistance.turtle.db.TurtleDatabase;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 import com.turtleplayer.persistance.turtle.mapping.TrackCreator;
@@ -39,6 +39,6 @@ public class PlayOrderRandom implements PlayOrderStrategy
 				  new QuerySqlite<Tables.Tracks, Tables.Tracks, Track>(
 							 playlist.getCompressedFilter(),
 							 new RandomOrder<Tables.Tracks>(),
-							 new First<Track>(Tables.TRACKS, new TrackCreator())));
+							 new FirstSqlLite<Track>(Tables.TRACKS, new TrackCreator())));
 	}
 }

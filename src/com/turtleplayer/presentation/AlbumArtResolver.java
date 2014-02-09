@@ -4,22 +4,22 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import ch.hoene.perzist.access.executor.OperationExecutor;
+import ch.hoene.perzist.access.filter.FieldFilter;
+import ch.hoene.perzist.access.filter.Operator;
+import ch.hoene.perzist.android.FirstSqlLite;
+import ch.hoene.perzist.android.QuerySqlite;
+import ch.hoene.perzist.util.Shorty;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import com.turtleplayer.model.AlbumArtLocation;
 import com.turtleplayer.model.Track;
-import com.turtleplayer.persistance.framework.executor.OperationExecutor;
-import com.turtleplayer.persistance.framework.filter.FieldFilter;
-import com.turtleplayer.persistance.framework.filter.Operator;
-import com.turtleplayer.persistance.source.sql.First;
-import com.turtleplayer.persistance.source.sqlite.QuerySqlite;
 import com.turtleplayer.persistance.turtle.FsReader;
 import com.turtleplayer.persistance.turtle.db.TurtleDatabase;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 import com.turtleplayer.persistance.turtle.mapping.AlbumArtLocationCreator;
 import com.turtleplayer.preferences.Preferences;
-import com.turtleplayer.util.Shorty;
 
 import java.io.IOException;
 
@@ -85,7 +85,7 @@ public abstract class AlbumArtResolver extends AsyncTask<Track, Void, Bitmap>
 			AlbumArtLocation albumArtLocation = OperationExecutor.execute(
 					  db,
 					  new QuerySqlite<Tables.AlbumArtLocations, Tables.AlbumArtLocations, AlbumArtLocation>(new FieldFilter<Tables.AlbumArtLocations, AlbumArtLocation, String>(Tables.AlbumArtLocations.PATH, Operator.EQ, track.getPath()),
-								 new First<AlbumArtLocation>(Tables.ALBUM_ART_LOCATIONS, new AlbumArtLocationCreator())));
+								 new FirstSqlLite<AlbumArtLocation>(Tables.ALBUM_ART_LOCATIONS, new AlbumArtLocationCreator())));
 
 			if(albumArtLocation != null)
 			{

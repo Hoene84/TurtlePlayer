@@ -1,7 +1,11 @@
 package com.turtleplayer.persistance.turtle;
 
-import com.turtleplayer.model.*;
-import com.turtleplayer.persistance.framework.filter.Filter;
+import ch.hoene.perzist.access.filter.Filter;
+import com.turtleplayer.model.Album;
+import com.turtleplayer.model.Artist;
+import com.turtleplayer.model.Genre;
+import com.turtleplayer.model.Song;
+import com.turtleplayer.model.Track;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 import java.util.Collection;

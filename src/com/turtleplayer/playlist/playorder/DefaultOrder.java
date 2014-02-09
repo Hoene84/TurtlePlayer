@@ -1,9 +1,9 @@
 package com.turtleplayer.playlist.playorder;
 
+import ch.hoene.perzist.access.sort.FieldOrder;
+import ch.hoene.perzist.access.sort.OrderSet;
+import ch.hoene.perzist.access.sort.SortOrder;
 import com.turtleplayer.model.Track;
-import com.turtleplayer.persistance.framework.sort.FieldOrder;
-import com.turtleplayer.persistance.framework.sort.OrderSet;
-import com.turtleplayer.persistance.framework.sort.SortOrder;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 /**

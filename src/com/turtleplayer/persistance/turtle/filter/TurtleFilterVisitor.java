@@ -17,7 +17,7 @@ package com.turtleplayer.persistance.turtle.filter;
  * @author Simon Honegger (Hoene84)
  */
 
-import com.turtleplayer.persistance.framework.filter.FilterVisitor;
+import ch.hoene.perzist.access.filter.FilterVisitor;
 
 /**
  * @param <R> What the Visitor Produces (can be {@link Void} if nothing gets produced)

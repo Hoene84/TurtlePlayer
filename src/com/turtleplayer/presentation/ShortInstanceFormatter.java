@@ -18,7 +18,12 @@
 
 package com.turtleplayer.presentation;
 
-import com.turtleplayer.model.*;
+import com.turtleplayer.model.Album;
+import com.turtleplayer.model.ArtistDigest;
+import com.turtleplayer.model.FSobject;
+import com.turtleplayer.model.GenreDigest;
+import com.turtleplayer.model.SongDigest;
+import com.turtleplayer.model.Track;
 
 class ShortInstanceFormatter extends InstanceFormatter
 {

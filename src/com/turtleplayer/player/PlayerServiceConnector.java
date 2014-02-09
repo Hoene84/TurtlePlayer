@@ -1,7 +1,15 @@
 package com.turtleplayer.player;
 
-import android.content.*;
-import android.os.*;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 import android.util.Log;
 import com.turtleplayer.model.Track;
 import com.turtleplayer.preferences.Preferences;

@@ -18,7 +18,7 @@
 
 package com.turtleplayer.model;
 
-import com.turtleplayer.util.Shorty;
+import ch.hoene.perzist.util.Shorty;
 
 public class AlbumDigest implements Album
 {

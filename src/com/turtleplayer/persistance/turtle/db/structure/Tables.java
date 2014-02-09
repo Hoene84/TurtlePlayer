@@ -1,14 +1,20 @@
 package com.turtleplayer.persistance.turtle.db.structure;
 
-import com.turtleplayer.model.*;
-import com.turtleplayer.persistance.framework.creator.Creator;
-import com.turtleplayer.persistance.source.relational.Field;
-import com.turtleplayer.persistance.source.relational.FieldPersistable;
-import com.turtleplayer.persistance.source.relational.Table;
-import com.turtleplayer.persistance.source.relational.View;
-import com.turtleplayer.persistance.source.relational.fieldtype.FieldPersistableAsInteger;
-import com.turtleplayer.persistance.source.relational.fieldtype.FieldPersistableAsString;
-import com.turtleplayer.util.Shorty;
+import ch.hoene.perzist.access.creator.Creator;
+import ch.hoene.perzist.source.relational.Field;
+import ch.hoene.perzist.source.relational.FieldPersistable;
+import ch.hoene.perzist.source.relational.Table;
+import ch.hoene.perzist.source.relational.View;
+import ch.hoene.perzist.source.relational.fieldtype.FieldPersistableAsInteger;
+import ch.hoene.perzist.source.relational.fieldtype.FieldPersistableAsString;
+import ch.hoene.perzist.util.Shorty;
+import com.turtleplayer.model.Album;
+import com.turtleplayer.model.AlbumArtLocation;
+import com.turtleplayer.model.Artist;
+import com.turtleplayer.model.FSobject;
+import com.turtleplayer.model.Genre;
+import com.turtleplayer.model.Song;
+import com.turtleplayer.model.Track;
 
 import java.util.Arrays;
 import java.util.List;

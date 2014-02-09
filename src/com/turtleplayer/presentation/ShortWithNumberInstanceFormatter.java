@@ -18,8 +18,8 @@
 
 package com.turtleplayer.presentation;
 
+import ch.hoene.perzist.util.Shorty;
 import com.turtleplayer.model.Track;
-import com.turtleplayer.util.Shorty;
 
 class ShortWithNumberInstanceFormatter extends ShortInstanceFormatter
 {

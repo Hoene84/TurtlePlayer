@@ -29,7 +29,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.turtleplayer.R;
-import com.turtleplayer.model.*;
+import com.turtleplayer.model.Album;
+import com.turtleplayer.model.ArtistDigest;
+import com.turtleplayer.model.FSobject;
+import com.turtleplayer.model.GenreDigest;
+import com.turtleplayer.model.Instance;
+import com.turtleplayer.model.InstanceVisitor;
+import com.turtleplayer.model.SongDigest;
+import com.turtleplayer.model.Track;
 import com.turtleplayer.presentation.InstanceFormatter;
 
 import java.util.Collections;

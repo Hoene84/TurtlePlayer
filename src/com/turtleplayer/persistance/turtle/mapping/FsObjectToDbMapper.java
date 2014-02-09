@@ -1,8 +1,9 @@
 package com.turtleplayer.persistance.turtle.mapping;
 
 import android.content.ContentValues;
+import ch.hoene.perzist.access.mapping.Mapping;
+import ch.hoene.perzist.source.relational.Table;
 import com.turtleplayer.model.FSobject;
-import com.turtleplayer.persistance.source.sql.QueryGeneratorTable;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 /**
@@ -22,14 +23,13 @@ import com.turtleplayer.persistance.turtle.db.structure.Tables;
  * @author Simon Honegger (Hoene84)
  */
 
-public class FsObjectToDbMapper extends QueryGeneratorTable<FSobject>
+public class FsObjectToDbMapper implements Mapping<Table, ContentValues, FSobject>
 {
-	public FsObjectToDbMapper()
-	{
-		super(Tables.DIRS);
-	}
+    public Table get() {
+        return Tables.DIRS;
+    }
 
-	public ContentValues create(FSobject fsObject)
+    public ContentValues create(FSobject fsObject)
 	{
 		final ContentValues values = new ContentValues();
 

@@ -23,24 +23,40 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import com.turtleplayer.model.*;
-import com.turtleplayer.persistance.framework.creator.ResultCreator;
-import com.turtleplayer.persistance.framework.db.Database;
-import com.turtleplayer.persistance.framework.db.ObservableDatabase;
-import com.turtleplayer.persistance.framework.executor.OperationExecutor;
-import com.turtleplayer.persistance.framework.filter.Filter;
-import com.turtleplayer.persistance.framework.sort.FieldOrder;
-import com.turtleplayer.persistance.framework.sort.SortOrder;
-import com.turtleplayer.persistance.source.relational.FieldPersistable;
-import com.turtleplayer.persistance.source.relational.View;
-import com.turtleplayer.persistance.source.sql.MappingDistinct;
-import com.turtleplayer.persistance.source.sql.MappingTable;
-import com.turtleplayer.persistance.source.sql.query.Select;
-import com.turtleplayer.persistance.source.sqlite.*;
+import ch.hoene.perzist.access.creator.ResultCreator;
+import ch.hoene.perzist.access.db.Database;
+import ch.hoene.perzist.access.executor.OperationExecutor;
+import ch.hoene.perzist.access.filter.Filter;
+import ch.hoene.perzist.access.sort.FieldOrder;
+import ch.hoene.perzist.access.sort.SortOrder;
+import ch.hoene.perzist.android.CounterSqlite;
+import ch.hoene.perzist.android.CreatorForListSqlite;
+import ch.hoene.perzist.android.DeleteTableContentSqlLite;
+import ch.hoene.perzist.android.InsertOperationSqlLite;
+import ch.hoene.perzist.android.MappingDistinctSqlLite;
+import ch.hoene.perzist.android.QuerySqlite;
+import ch.hoene.perzist.source.relational.FieldPersistable;
+import ch.hoene.perzist.source.relational.View;
+import ch.hoene.perzist.source.sql.query.Select;
+import com.turtleplayer.model.Album;
+import com.turtleplayer.model.AlbumArtLocation;
+import com.turtleplayer.model.Artist;
+import com.turtleplayer.model.FSobject;
+import com.turtleplayer.model.Genre;
+import com.turtleplayer.model.Song;
+import com.turtleplayer.model.Track;
 import com.turtleplayer.persistance.turtle.FileBase;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 import com.turtleplayer.persistance.turtle.db.structure.Views;
-import com.turtleplayer.persistance.turtle.mapping.*;
+import com.turtleplayer.persistance.turtle.mapping.AlbumArtLoactionToDbMapper;
+import com.turtleplayer.persistance.turtle.mapping.AlbumCreator;
+import com.turtleplayer.persistance.turtle.mapping.ArtistCreator;
+import com.turtleplayer.persistance.turtle.mapping.DirCreator;
+import com.turtleplayer.persistance.turtle.mapping.FsObjectToDbMapper;
+import com.turtleplayer.persistance.turtle.mapping.GenreCreator;
+import com.turtleplayer.persistance.turtle.mapping.SongCreator;
+import com.turtleplayer.persistance.turtle.mapping.TrackCreator;
+import com.turtleplayer.persistance.turtle.mapping.TrackToDbMapper;
 
 import java.util.Arrays;
 import java.util.List;
@@ -158,7 +174,7 @@ public class TurtleDatabase extends ObservableDatabase<Select, Cursor, SQLiteDat
 				  new QuerySqlite<PROJECTION, TARGET, List<RESULT>>(
 							 filter,
 							 FieldOrder.<PROJECTION, RESULT, Z>getMultiFieldOrder(SortOrder.ASC, sortFields),
-							 new MappingDistinct<TARGET, PROJECTION,  RESULT>(view, new CreatorForListSqlite<TARGET, RESULT>(creator), target)
+							 new MappingDistinctSqlLite<TARGET, PROJECTION,  RESULT>(view, new CreatorForListSqlite<TARGET, RESULT>(creator), target)
 				  )
 		);
 	}

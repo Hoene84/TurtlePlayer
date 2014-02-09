@@ -1,5 +1,6 @@
 package com.turtleplayer.util;
 
+import ch.hoene.perzist.util.Shorty;
 import com.turtleplayer.R;
 import com.turtleplayer.TurtlePlayer;
 

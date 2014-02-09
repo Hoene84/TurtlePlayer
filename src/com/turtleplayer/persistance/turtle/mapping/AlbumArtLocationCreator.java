@@ -1,8 +1,8 @@
 package com.turtleplayer.persistance.turtle.mapping;
 
 import android.database.Cursor;
-import com.turtleplayer.model.*;
-import com.turtleplayer.persistance.framework.creator.Creator;
+import ch.hoene.perzist.access.creator.Creator;
+import com.turtleplayer.model.AlbumArtLocation;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 /**

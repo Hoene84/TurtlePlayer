@@ -20,25 +20,38 @@
 package com.turtleplayer.persistance.turtle;
 
 import android.util.Log;
+import ch.hoene.perzist.access.executor.OperationExecutor;
+import ch.hoene.perzist.access.filter.FieldFilter;
+import ch.hoene.perzist.access.filter.Operator;
+import ch.hoene.perzist.android.FirstSqlLite;
+import ch.hoene.perzist.android.QuerySqlite;
+import ch.hoene.perzist.util.Shorty;
 import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import com.turtleplayer.common.filefilter.FileFilters;
-import com.turtleplayer.model.*;
-import com.turtleplayer.persistance.framework.executor.OperationExecutor;
-import com.turtleplayer.persistance.framework.filter.FieldFilter;
-import com.turtleplayer.persistance.framework.filter.Operator;
-import com.turtleplayer.persistance.source.sql.First;
-import com.turtleplayer.persistance.source.sqlite.QuerySqlite;
+import com.turtleplayer.model.AlbumArtLocation;
+import com.turtleplayer.model.AlbumDigest;
+import com.turtleplayer.model.ArtistDigest;
+import com.turtleplayer.model.FSobject;
+import com.turtleplayer.model.GenreDigest;
+import com.turtleplayer.model.SongDigest;
+import com.turtleplayer.model.Track;
 import com.turtleplayer.persistance.turtle.db.TurtleDatabase;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 import com.turtleplayer.persistance.turtle.mapping.AlbumArtLocationCreator;
 import com.turtleplayer.preferences.Preferences;
-import com.turtleplayer.util.Shorty;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class FsReader
 {
@@ -198,7 +211,7 @@ public class FsReader
 				  db,
 				  new QuerySqlite<Tables.AlbumArtLocations, Tables.AlbumArtLocations, AlbumArtLocation>(
 							 new FieldFilter<Tables.AlbumArtLocations, AlbumArtLocation, String>(Tables.AlbumArtLocations.PATH, Operator.EQ, mediaFileDir),
-				  			 new First<AlbumArtLocation>(Tables.ALBUM_ART_LOCATIONS, new AlbumArtLocationCreator())
+				  			 new FirstSqlLite<AlbumArtLocation>(Tables.ALBUM_ART_LOCATIONS, new AlbumArtLocationCreator())
 				  )
 		);
 

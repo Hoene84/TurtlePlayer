@@ -21,18 +21,21 @@ package com.turtleplayer.playlist;
 
 import android.content.Context;
 import android.util.Log;
+import ch.hoene.perzist.access.executor.OperationExecutor;
+import ch.hoene.perzist.access.filter.FieldFilter;
+import ch.hoene.perzist.access.filter.Filter;
+import ch.hoene.perzist.access.filter.FilterSet;
+import ch.hoene.perzist.access.filter.Operator;
+import ch.hoene.perzist.access.sort.RandomOrder;
+import ch.hoene.perzist.android.FirstSqlLite;
+import ch.hoene.perzist.android.QuerySqlite;
+import ch.hoene.perzist.util.Shorty;
 import com.turtleplayer.Stats;
 import com.turtleplayer.common.filefilter.FileFilters;
 import com.turtleplayer.controller.Observer;
-import com.turtleplayer.model.*;
-import com.turtleplayer.persistance.framework.executor.OperationExecutor;
-import com.turtleplayer.persistance.framework.filter.FieldFilter;
-import com.turtleplayer.persistance.framework.filter.Filter;
-import com.turtleplayer.persistance.framework.filter.FilterSet;
-import com.turtleplayer.persistance.framework.filter.Operator;
-import com.turtleplayer.persistance.framework.sort.RandomOrder;
-import com.turtleplayer.persistance.source.sql.First;
-import com.turtleplayer.persistance.source.sqlite.QuerySqlite;
+import com.turtleplayer.model.FSobject;
+import com.turtleplayer.model.Track;
+import com.turtleplayer.model.TrackBundle;
 import com.turtleplayer.persistance.turtle.FsReader;
 import com.turtleplayer.persistance.turtle.db.TurtleDatabase;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
@@ -40,11 +43,19 @@ import com.turtleplayer.persistance.turtle.mapping.TrackCreator;
 import com.turtleplayer.playlist.playorder.PlayOrderStrategy;
 import com.turtleplayer.preferences.Keys;
 import com.turtleplayer.preferences.Preferences;
-import com.turtleplayer.util.Shorty;
 
 import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Playlist
 {
@@ -144,7 +155,7 @@ public class Playlist
 										getCompressedFilter(),
 										new FieldFilter<Tables.Tracks, Track, String>(Tables.FsObjects.NAME, Operator.EQ, fsObject.getPath()),
 										new FieldFilter<Tables.Tracks, Track, String>(Tables.FsObjects.PATH, Operator.EQ, fsObject.getName())),
-							 new First<Track>(Tables.TRACKS, new TrackCreator())
+							 new FirstSqlLite<Track>(Tables.TRACKS, new TrackCreator())
 				  )
 		);
 	}
@@ -166,7 +177,7 @@ public class Playlist
 				  new QuerySqlite<Tables.Tracks, Tables.Tracks, Track>(
 							 getCompressedFilter(),
 							 new RandomOrder<Tables.Tracks>(),
-							 new First<Track>(Tables.TRACKS, new TrackCreator())));
+							 new FirstSqlLite<Track>(Tables.TRACKS, new TrackCreator())));
 	}
 
 	/**

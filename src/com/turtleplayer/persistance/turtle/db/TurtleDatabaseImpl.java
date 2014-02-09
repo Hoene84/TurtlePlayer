@@ -3,7 +3,7 @@ package com.turtleplayer.persistance.turtle.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.turtleplayer.persistance.source.relational.FieldPersistable;
+import ch.hoene.perzist.source.relational.FieldPersistable;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 import java.util.Arrays;

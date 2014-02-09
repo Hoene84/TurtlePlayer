@@ -19,7 +19,7 @@
 package com.turtleplayer.preferences;
 
 import android.os.Environment;
-import com.turtleplayer.persistance.framework.filter.Filter;
+import ch.hoene.perzist.access.filter.Filter;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 import java.util.HashSet;

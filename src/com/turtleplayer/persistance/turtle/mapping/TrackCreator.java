@@ -1,8 +1,12 @@
 package com.turtleplayer.persistance.turtle.mapping;
 
 import android.database.Cursor;
-import com.turtleplayer.model.*;
-import com.turtleplayer.persistance.framework.creator.ResultCreator;
+import ch.hoene.perzist.access.creator.ResultCreator;
+import com.turtleplayer.model.AlbumDigest;
+import com.turtleplayer.model.ArtistDigest;
+import com.turtleplayer.model.GenreDigest;
+import com.turtleplayer.model.SongDigest;
+import com.turtleplayer.model.Track;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 /**

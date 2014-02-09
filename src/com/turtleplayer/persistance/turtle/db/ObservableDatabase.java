@@ -1,5 +1,6 @@
-package com.turtleplayer.persistance.framework.db;
+package com.turtleplayer.persistance.turtle.db;
 
+import ch.hoene.perzist.access.db.Database;
 import com.turtleplayer.controller.Observer;
 import com.turtleplayer.model.Instance;
 

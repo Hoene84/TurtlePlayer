@@ -1,8 +1,9 @@
 package com.turtleplayer.persistance.turtle.mapping;
 
 import android.content.ContentValues;
+import ch.hoene.perzist.access.mapping.Mapping;
+import ch.hoene.perzist.source.relational.Table;
 import com.turtleplayer.model.AlbumArtLocation;
-import com.turtleplayer.persistance.source.sql.QueryGeneratorTable;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 /**
@@ -22,14 +23,13 @@ import com.turtleplayer.persistance.turtle.db.structure.Tables;
  * @author Simon Honegger (Hoene84)
  */
 
-public class AlbumArtLoactionToDbMapper extends QueryGeneratorTable<AlbumArtLocation>
+public class AlbumArtLoactionToDbMapper implements Mapping<Table, ContentValues, AlbumArtLocation>
 {
-	public AlbumArtLoactionToDbMapper()
-	{
-		super(Tables.ALBUM_ART_LOCATIONS);
-	}
+    public Table get() {
+        return Tables.ALBUM_ART_LOCATIONS;
+    }
 
-	public ContentValues create(AlbumArtLocation albumArtLocation)
+    public ContentValues create(AlbumArtLocation albumArtLocation)
 	{
 		final ContentValues values = new ContentValues();
 

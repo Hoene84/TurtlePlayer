@@ -21,15 +21,30 @@ package com.turtleplayer.view;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import ch.hoene.perzist.access.filter.FieldFilter;
+import ch.hoene.perzist.access.filter.Filter;
+import ch.hoene.perzist.access.filter.FilterSet;
+import ch.hoene.perzist.access.filter.NotFilter;
+import ch.hoene.perzist.access.filter.Operator;
 import com.turtleplayer.Player;
 import com.turtleplayer.R;
 import com.turtleplayer.TurtlePlayer;
 import com.turtleplayer.common.MatchFilterVisitor;
-import com.turtleplayer.model.*;
-import com.turtleplayer.persistance.framework.filter.*;
+import com.turtleplayer.model.Album;
+import com.turtleplayer.model.AlbumDigest;
+import com.turtleplayer.model.Artist;
+import com.turtleplayer.model.ArtistDigest;
+import com.turtleplayer.model.FSobject;
+import com.turtleplayer.model.Genre;
+import com.turtleplayer.model.GenreDigest;
+import com.turtleplayer.model.Instance;
+import com.turtleplayer.model.InstanceVisitor;
+import com.turtleplayer.model.SongDigest;
+import com.turtleplayer.model.Track;
 import com.turtleplayer.persistance.turtle.db.TurtleDatabase;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
-import com.turtleplayer.persistance.turtle.filter.*;
+import com.turtleplayer.persistance.turtle.filter.DirFilter;
+import com.turtleplayer.persistance.turtle.filter.TurtleFilterVisitor;
 import com.turtleplayer.preferences.AbstractKey;
 import com.turtleplayer.preferences.Keys;
 import com.turtleplayer.preferences.Preferences;
@@ -37,7 +52,12 @@ import com.turtleplayer.preferences.PreferencesObserver;
 import com.turtleplayer.presentation.InstanceFormatter;
 import com.turtleplayer.util.DefaultAdapter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class FileChooser implements TurtleDatabase.DbObserver
 {

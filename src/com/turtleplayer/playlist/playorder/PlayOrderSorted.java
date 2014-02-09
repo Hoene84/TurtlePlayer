@@ -19,13 +19,13 @@
 package com.turtleplayer.playlist.playorder;
 
 import android.util.Log;
+import ch.hoene.perzist.access.executor.OperationExecutor;
+import ch.hoene.perzist.access.paging.Paging;
+import ch.hoene.perzist.access.sort.OrderSet;
+import ch.hoene.perzist.access.sort.SortOrder;
+import ch.hoene.perzist.android.FirstSqlLite;
+import ch.hoene.perzist.android.QuerySqlite;
 import com.turtleplayer.model.Track;
-import com.turtleplayer.persistance.framework.executor.OperationExecutor;
-import com.turtleplayer.persistance.framework.paging.Paging;
-import com.turtleplayer.persistance.framework.sort.OrderSet;
-import com.turtleplayer.persistance.framework.sort.SortOrder;
-import com.turtleplayer.persistance.source.sql.First;
-import com.turtleplayer.persistance.source.sqlite.QuerySqlite;
 import com.turtleplayer.persistance.turtle.db.TurtleDatabase;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 import com.turtleplayer.persistance.turtle.mapping.TrackCreator;
@@ -68,7 +68,7 @@ public class PlayOrderSorted implements PlayOrderStrategy
 				  new QuerySqlite<Tables.Tracks, Tables.Tracks, Track>(
 							 Paging.getFilter(playlist.getCompressedFilter(), ofTrack, currOrder),
 							 order,
-							 new First<Track>(Tables.TRACKS, new TrackCreator())
+							 new FirstSqlLite<Track>(Tables.TRACKS, new TrackCreator())
 				  )
 			);
 			if(nextTrack != null){
