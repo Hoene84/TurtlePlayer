@@ -25,6 +25,7 @@ import ch.hoene.perzist.access.filter.FieldFilter;
 import ch.hoene.perzist.access.filter.Operator;
 import ch.hoene.perzist.android.FirstSqlLite;
 import ch.hoene.perzist.android.QuerySqlite;
+import ch.hoene.perzist.android.ReadOperationSqlLite;
 import ch.hoene.perzist.util.Shorty;
 import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.InvalidDataException;
@@ -208,11 +209,15 @@ public class FsReader
 		final String result;
 
 		AlbumArtLocation albumArtLocation = OperationExecutor.execute(
-				  db,
-				  new QuerySqlite<Tables.AlbumArtLocations, Tables.AlbumArtLocations, AlbumArtLocation>(
-							 new FieldFilter<Tables.AlbumArtLocations, AlbumArtLocation, String>(Tables.AlbumArtLocations.PATH, Operator.EQ, mediaFileDir),
-				  			 new FirstSqlLite<AlbumArtLocation>(Tables.ALBUM_ART_LOCATIONS, new AlbumArtLocationCreator())
-				  )
+			db,
+			new ReadOperationSqlLite<AlbumArtLocation>(
+			new QuerySqlite<Tables.AlbumArtLocations, Tables.AlbumArtLocations, AlbumArtLocation>(
+				new FieldFilter<Tables.AlbumArtLocations, AlbumArtLocation, String>(
+					Tables.AlbumArtLocations.PATH,
+					Operator.EQ,
+					mediaFileDir),
+				new FirstSqlLite<AlbumArtLocation>(Tables.ALBUM_ART_LOCATIONS, new AlbumArtLocationCreator())
+			))
 		);
 
 		if(albumArtLocation != null)

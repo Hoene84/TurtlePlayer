@@ -1,6 +1,7 @@
 package com.turtleplayer.persistance.turtle.db;
 
-import ch.hoene.perzist.access.db.Database;
+import android.database.sqlite.SQLiteOpenHelper;
+import ch.hoene.perzist.android.DatabaseSqlLite;
 import com.turtleplayer.controller.Observer;
 import com.turtleplayer.model.Instance;
 
@@ -24,10 +25,15 @@ import java.util.Map;
  * @author Simon Honegger (Hoene84)
  */
 
-public abstract class ObservableDatabase<Q,C,D> implements Database<Q,C,D>
+public abstract class ObservableDatabase extends DatabaseSqlLite
 {
 
-	//--------------------------------------------- Observable
+
+    protected ObservableDatabase(SQLiteOpenHelper sqLiteOpenHelper) {
+        super(sqLiteOpenHelper);
+    }
+
+    //--------------------------------------------- Observable
 
 	private final Map<String, DbObserver> observers = new HashMap<String, DbObserver>();
 

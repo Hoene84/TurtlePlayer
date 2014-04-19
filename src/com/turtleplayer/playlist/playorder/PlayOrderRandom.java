@@ -4,6 +4,7 @@ import ch.hoene.perzist.access.executor.OperationExecutor;
 import ch.hoene.perzist.access.sort.RandomOrder;
 import ch.hoene.perzist.android.FirstSqlLite;
 import ch.hoene.perzist.android.QuerySqlite;
+import ch.hoene.perzist.android.ReadOperationSqlLite;
 import com.turtleplayer.model.Track;
 import com.turtleplayer.persistance.turtle.db.TurtleDatabase;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
@@ -35,10 +36,15 @@ public class PlayOrderRandom implements PlayOrderStrategy
 
 	private Track get()
 	{
-		return OperationExecutor.execute(db,
-				  new QuerySqlite<Tables.Tracks, Tables.Tracks, Track>(
-							 playlist.getCompressedFilter(),
-							 new RandomOrder<Tables.Tracks>(),
-							 new FirstSqlLite<Track>(Tables.TRACKS, new TrackCreator())));
+		return OperationExecutor.execute(
+			db,
+			new ReadOperationSqlLite<Track>(
+				new QuerySqlite<Tables.Tracks, Tables.Tracks, Track>(
+					playlist.getCompressedFilter(),
+					new RandomOrder<Tables.Tracks>(),
+					new FirstSqlLite<Track>(Tables.TRACKS, new TrackCreator())
+				)
+			)
+		);
 	}
 }

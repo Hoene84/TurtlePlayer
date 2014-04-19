@@ -54,6 +54,7 @@ import com.turtleplayer.model.Instance;
 import com.turtleplayer.model.Track;
 import com.turtleplayer.persistance.turtle.db.ObservableDatabase;
 import com.turtleplayer.persistance.turtle.db.TurtleDatabase;
+import com.turtleplayer.persistance.turtle.db.TurtleDatabaseImpl;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 import com.turtleplayer.player.ObservableOutput;
 import com.turtleplayer.player.Output;
@@ -250,7 +251,14 @@ public class Player extends ListActivity
 	private void SetupApplication()
 	{
 		tp = (TurtlePlayer) getApplication();
-		tp.db = new TurtleDatabase(tp.getApplicationContext());
+		tp.db = new TurtleDatabase( new TurtleDatabaseImpl(tp.getApplicationContext())
+    {
+        @Override
+        public void dbResetted()
+        {
+            tp.db.notifyCleared();
+        }
+    });
 		tp.playlist = new Playlist(tp.getApplicationContext(), tp.db);
 		fileChooser = new FileChooser(FileChooser.Mode.Genre, tp, this)
 		{

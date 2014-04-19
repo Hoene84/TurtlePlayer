@@ -29,6 +29,7 @@ import ch.hoene.perzist.access.filter.Operator;
 import ch.hoene.perzist.access.sort.RandomOrder;
 import ch.hoene.perzist.android.FirstSqlLite;
 import ch.hoene.perzist.android.QuerySqlite;
+import ch.hoene.perzist.android.ReadOperationSqlLite;
 import ch.hoene.perzist.util.Shorty;
 import com.turtleplayer.Stats;
 import com.turtleplayer.common.filefilter.FileFilters;
@@ -139,9 +140,9 @@ public class Playlist
 	 */
 	public TrackBundle enrich(PlayOrderStrategy strategy, Track track){
 		return new TrackBundle(
-				  track,
-				  strategy.getNext(track),
-				  strategy.getPrevious(track)
+			track,
+			strategy.getNext(track),
+			strategy.getPrevious(track)
 		);
 	}
 
@@ -149,14 +150,21 @@ public class Playlist
 	{
 		FSobject fsObject = new FSobject(src);
 		return OperationExecutor.execute(
-				  db,
-				  new QuerySqlite<Tables.Tracks, Tables.Tracks, Track>(
-							 new FilterSet<Tables.Tracks>(
-										getCompressedFilter(),
-										new FieldFilter<Tables.Tracks, Track, String>(Tables.FsObjects.NAME, Operator.EQ, fsObject.getPath()),
-										new FieldFilter<Tables.Tracks, Track, String>(Tables.FsObjects.PATH, Operator.EQ, fsObject.getName())),
-							 new FirstSqlLite<Track>(Tables.TRACKS, new TrackCreator())
-				  )
+			db,
+			new ReadOperationSqlLite<Track>(
+				new QuerySqlite<Tables.Tracks, Tables.Tracks, Track>(
+					new FilterSet<Tables.Tracks>(
+						getCompressedFilter(),
+						new FieldFilter<Tables.Tracks, Track, String>(
+							Tables.FsObjects.NAME,
+							Operator.EQ,
+							fsObject.getPath()),
+						new FieldFilter<Tables.Tracks, Track, String>(
+							Tables.FsObjects.PATH,
+							Operator.EQ,
+							fsObject.getName())),
+					new FirstSqlLite<Track>(Tables.TRACKS, new TrackCreator())
+				))
 		);
 	}
 
@@ -174,10 +182,11 @@ public class Playlist
 	public Track getRandom()
 	{
 		return OperationExecutor.execute(db,
-				  new QuerySqlite<Tables.Tracks, Tables.Tracks, Track>(
-							 getCompressedFilter(),
-							 new RandomOrder<Tables.Tracks>(),
-							 new FirstSqlLite<Track>(Tables.TRACKS, new TrackCreator())));
+			new ReadOperationSqlLite<Track>(
+				new QuerySqlite<Tables.Tracks, Tables.Tracks, Track>(
+					getCompressedFilter(),
+					new RandomOrder<Tables.Tracks>(),
+					new FirstSqlLite<Track>(Tables.TRACKS, new TrackCreator()))));
 	}
 
 	/**

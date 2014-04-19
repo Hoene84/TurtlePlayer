@@ -9,6 +9,7 @@ import ch.hoene.perzist.access.filter.FieldFilter;
 import ch.hoene.perzist.access.filter.Operator;
 import ch.hoene.perzist.android.FirstSqlLite;
 import ch.hoene.perzist.android.QuerySqlite;
+import ch.hoene.perzist.android.ReadOperationSqlLite;
 import ch.hoene.perzist.util.Shorty;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -80,20 +81,27 @@ public abstract class AlbumArtResolver extends AsyncTask<Track, Void, Bitmap>
 	private class CachedFsLookupStrategy implements LookupStrategy
 	{
 
-		public Bitmap lookup(Track track)
-		{
-			AlbumArtLocation albumArtLocation = OperationExecutor.execute(
-					  db,
-					  new QuerySqlite<Tables.AlbumArtLocations, Tables.AlbumArtLocations, AlbumArtLocation>(new FieldFilter<Tables.AlbumArtLocations, AlbumArtLocation, String>(Tables.AlbumArtLocations.PATH, Operator.EQ, track.getPath()),
-								 new FirstSqlLite<AlbumArtLocation>(Tables.ALBUM_ART_LOCATIONS, new AlbumArtLocationCreator())));
+      public Bitmap lookup(Track track)
+      {
+          AlbumArtLocation albumArtLocation = OperationExecutor.execute(
+                  db,
+                  new ReadOperationSqlLite<AlbumArtLocation>(
+                          new QuerySqlite<Tables.AlbumArtLocations, Tables.AlbumArtLocations, AlbumArtLocation>(
+                                  new FieldFilter<Tables.AlbumArtLocations, AlbumArtLocation, String>(
+                                          Tables.AlbumArtLocations.PATH,
+                                          Operator.EQ,
+                                          track.getPath()),
+                                  new FirstSqlLite<AlbumArtLocation>(
+                                          Tables.ALBUM_ART_LOCATIONS,
+                                          new AlbumArtLocationCreator()))));
 
-			if(albumArtLocation != null)
-			{
-				return BitmapFactory.decodeFile(albumArtLocation.getAlbumArtpath());
-			}
-			return null;
-		}
-	}
+          if(albumArtLocation != null)
+          {
+              return BitmapFactory.decodeFile(albumArtLocation.getAlbumArtpath());
+          }
+          return null;
+      }
+  }
 
 
 	private class FsLookupStrategy implements LookupStrategy

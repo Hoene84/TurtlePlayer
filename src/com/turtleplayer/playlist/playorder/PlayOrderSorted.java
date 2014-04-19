@@ -25,6 +25,7 @@ import ch.hoene.perzist.access.sort.OrderSet;
 import ch.hoene.perzist.access.sort.SortOrder;
 import ch.hoene.perzist.android.FirstSqlLite;
 import ch.hoene.perzist.android.QuerySqlite;
+import ch.hoene.perzist.android.ReadOperationSqlLite;
 import com.turtleplayer.model.Track;
 import com.turtleplayer.persistance.turtle.db.TurtleDatabase;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
@@ -60,16 +61,17 @@ public class PlayOrderSorted implements PlayOrderStrategy
 		while(!currOrder.isEmpty())
 		{
 			Log.v(PlayOrderSorted.class.getName(),
-					  "Generate Paging Filters from: " + order);
+				"Generate Paging Filters from: " + order);
 			Log.v(PlayOrderSorted.class.getName(),
-					  "resulting in Paging Filters : " + Paging.getFilter(playlist.getCompressedFilter(), ofTrack, currOrder));
+				"resulting in Paging Filters : " + Paging.getFilter(playlist.getCompressedFilter(), ofTrack, currOrder));
 			Track nextTrack = OperationExecutor.execute(
-				  db,
-				  new QuerySqlite<Tables.Tracks, Tables.Tracks, Track>(
-							 Paging.getFilter(playlist.getCompressedFilter(), ofTrack, currOrder),
-							 order,
-							 new FirstSqlLite<Track>(Tables.TRACKS, new TrackCreator())
-				  )
+				db,
+				new ReadOperationSqlLite<Track>(
+					new QuerySqlite<Tables.Tracks, Tables.Tracks, Track>(
+						Paging.getFilter(playlist.getCompressedFilter(), ofTrack, currOrder),
+						order,
+						new FirstSqlLite<Track>(Tables.TRACKS, new TrackCreator())
+					))
 			);
 			if(nextTrack != null){
 				return nextTrack;
