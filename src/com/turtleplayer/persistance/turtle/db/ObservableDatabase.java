@@ -29,11 +29,11 @@ public abstract class ObservableDatabase extends DatabaseSqlLite
 {
 
 
-    protected ObservableDatabase(SQLiteOpenHelper sqLiteOpenHelper) {
-        super(sqLiteOpenHelper);
-    }
+	protected ObservableDatabase(SQLiteOpenHelper sqLiteOpenHelper) {
+		super(sqLiteOpenHelper);
+	}
 
-    //--------------------------------------------- Observable
+	//--------------------------------------------- Observable
 
 	private final Map<String, DbObserver> observers = new HashMap<String, DbObserver>();
 

@@ -25,11 +25,11 @@ import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 public class FsObjectToDbMapper implements Mapping<Table, ContentValues, FSobject>
 {
-    public Table get() {
-        return Tables.DIRS;
-    }
+	public Table get() {
+		return Tables.DIRS;
+	}
 
-    public ContentValues create(FSobject fsObject)
+	public ContentValues create(FSobject fsObject)
 	{
 		final ContentValues values = new ContentValues();
 

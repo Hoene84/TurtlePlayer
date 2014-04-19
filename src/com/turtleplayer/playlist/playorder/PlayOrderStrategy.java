@@ -6,7 +6,7 @@ public interface PlayOrderStrategy {
 
 	/*
 	  * @return null if strategy has no next song for this config and tracklist
-     */
+	 */
 	Track getNext(Track currTrack);
 
 	/**

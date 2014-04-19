@@ -25,20 +25,20 @@ import static junit.framework.Assert.assertEquals;
 
 public class FsReaderTest
 {
-    @Test
-    public void testParseTrackNumber() throws Exception
-    {
-        assertEquals(1, FsReader.parseTrackNumber("1"));
-        assertEquals(1, FsReader.parseTrackNumber("01"));
-        assertEquals(1, FsReader.parseTrackNumber("1/2"));
-        assertEquals(1, FsReader.parseTrackNumber("1,2"));
-        assertEquals(1, FsReader.parseTrackNumber("1;2"));
-        assertEquals(0, FsReader.parseTrackNumber("00"));
-        assertEquals(0, FsReader.parseTrackNumber("0"));
-        assertEquals(0, FsReader.parseTrackNumber("0/0"));
-        assertEquals(0, FsReader.parseTrackNumber(""));
-        assertEquals(0, FsReader.parseTrackNumber("asdad"));
-        assertEquals(10, FsReader.parseTrackNumber("10"));
-        assertEquals(10, FsReader.parseTrackNumber("010"));
-    }
+	@Test
+	public void testParseTrackNumber() throws Exception
+	{
+		assertEquals(1, FsReader.parseTrackNumber("1"));
+		assertEquals(1, FsReader.parseTrackNumber("01"));
+		assertEquals(1, FsReader.parseTrackNumber("1/2"));
+		assertEquals(1, FsReader.parseTrackNumber("1,2"));
+		assertEquals(1, FsReader.parseTrackNumber("1;2"));
+		assertEquals(0, FsReader.parseTrackNumber("00"));
+		assertEquals(0, FsReader.parseTrackNumber("0"));
+		assertEquals(0, FsReader.parseTrackNumber("0/0"));
+		assertEquals(0, FsReader.parseTrackNumber(""));
+		assertEquals(0, FsReader.parseTrackNumber("asdad"));
+		assertEquals(10, FsReader.parseTrackNumber("10"));
+		assertEquals(10, FsReader.parseTrackNumber("010"));
+	}
 }

@@ -25,8 +25,8 @@ import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 public class AlbumCreator implements ResultCreator<Tables.AlbumsReadable, Album, Cursor>
 {
-    public Album create(Cursor source)
-    {
-        return new AlbumDigest(source.getString(source.getColumnIndex(Tables.AlbumsReadable.ALBUM.getName())));
-    }
+	public Album create(Cursor source)
+	{
+		return new AlbumDigest(source.getString(source.getColumnIndex(Tables.AlbumsReadable.ALBUM.getName())));
+	}
 }

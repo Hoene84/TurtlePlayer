@@ -23,17 +23,17 @@ import com.turtleplayer.model.Track;
 
 class ShortWithNumberInstanceFormatter extends ShortInstanceFormatter
 {
-    @Override
-    public String visit(Track track)
-    {
-        String trackName = track.getSongName();
+	@Override
+	public String visit(Track track)
+	{
+		String trackName = track.getSongName();
 
-        int number = track.GetNumber();
+		int number = track.GetNumber();
 
-        if(!Shorty.isVoid(number))
-        {
-            return number + DELIMITER + trackName;
-        }
-        return  trackName;
-    }
+		if(!Shorty.isVoid(number))
+		{
+			return number + DELIMITER + trackName;
+		}
+		return  trackName;
+	}
 }

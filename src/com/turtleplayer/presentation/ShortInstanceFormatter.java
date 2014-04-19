@@ -27,10 +27,10 @@ import com.turtleplayer.model.Track;
 
 class ShortInstanceFormatter extends InstanceFormatter
 {
-    public String visit(Track track)
-    {
-        return track.getSongName();
-    }
+	public String visit(Track track)
+	{
+		return track.getSongName();
+	}
 
 	public String visit(SongDigest track)
 	{
@@ -38,9 +38,9 @@ class ShortInstanceFormatter extends InstanceFormatter
 	}
 
 	public String visit(Album album)
-    {
-        return album.getAlbumName();
-    }
+	{
+		return album.getAlbumName();
+	}
 
 	public String visit(GenreDigest genre)
 	{

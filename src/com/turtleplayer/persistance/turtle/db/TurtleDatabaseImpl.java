@@ -4,13 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import ch.hoene.perzist.source.relational.FieldPersistable;
-import com.turtleplayer.controller.Observer;
-import com.turtleplayer.model.Instance;
 import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * TURTLE PLAYER

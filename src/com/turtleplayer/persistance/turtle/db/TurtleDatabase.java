@@ -18,27 +18,9 @@
 
 package com.turtleplayer.persistance.turtle.db;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-import ch.hoene.perzist.access.creator.ResultCreator;
-import ch.hoene.perzist.access.db.Database;
-import ch.hoene.perzist.access.executor.OperationExecutor;
 import ch.hoene.perzist.access.filter.Filter;
-import ch.hoene.perzist.access.sort.FieldOrder;
 import ch.hoene.perzist.access.sort.SortOrder;
-import ch.hoene.perzist.android.CounterSqlite;
-import ch.hoene.perzist.android.CreatorForListSqlite;
-import ch.hoene.perzist.android.DeleteTableContentSqlLite;
-import ch.hoene.perzist.android.InsertOperationSqlLite;
-import ch.hoene.perzist.android.MappingDistinctSqlLite;
-import ch.hoene.perzist.android.QuerySqlite;
-import ch.hoene.perzist.source.relational.FieldPersistable;
 import ch.hoene.perzist.source.relational.FieldSortOrder;
-import ch.hoene.perzist.source.relational.View;
-import ch.hoene.perzist.source.sql.query.Select;
 import com.turtleplayer.model.Album;
 import com.turtleplayer.model.AlbumArtLocation;
 import com.turtleplayer.model.Artist;
@@ -59,7 +41,6 @@ import com.turtleplayer.persistance.turtle.mapping.SongCreator;
 import com.turtleplayer.persistance.turtle.mapping.TrackCreator;
 import com.turtleplayer.persistance.turtle.mapping.TrackToDbMapper;
 
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -69,7 +50,7 @@ public class TurtleDatabase extends ObservableDatabase implements FileBase
 
 	public TurtleDatabase(TurtleDatabaseImpl turtleDatabaseImpl)
 	{
-      super(turtleDatabaseImpl);
+		super(turtleDatabaseImpl);
 	}
 
 	//Write------------------------------------
@@ -79,7 +60,7 @@ public class TurtleDatabase extends ObservableDatabase implements FileBase
 	 */
 	public boolean push(final Track track)
 	{
-    int insertedCount = push(track, new TrackToDbMapper());
+		int insertedCount = push(track, new TrackToDbMapper());
 		if(insertedCount > 0)
 		{
 			notifyUpdate(track);
@@ -90,18 +71,18 @@ public class TurtleDatabase extends ObservableDatabase implements FileBase
 
 	public void push(final AlbumArtLocation albumArtLocation)
 	{
-      push(albumArtLocation, new AlbumArtLoactionToDbMapper());
+		push(albumArtLocation, new AlbumArtLoactionToDbMapper());
 	}
 
 	public void push(final FSobject dir)
 	{
-      push(dir, new FsObjectToDbMapper());
+		push(dir, new FsObjectToDbMapper());
 	}
 
 	public void clear()
 	{
 		drop(Tables.TRACKS);
-    drop(Tables.DIRS);
+		drop(Tables.DIRS);
 		notifyCleared();
 	}
 
@@ -114,7 +95,7 @@ public class TurtleDatabase extends ObservableDatabase implements FileBase
 
 	public int countAvailableTracks(Filter<Tables.Tracks> filter)
 	{
-      return count(filter, Tables.TRACKS);
+		return count(filter, Tables.TRACKS);
 	}
 
 	public List<? extends Track> getTracks(Filter<? super Tables.Tracks> filter)

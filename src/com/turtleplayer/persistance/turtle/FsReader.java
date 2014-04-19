@@ -57,9 +57,10 @@ import java.util.Set;
 public class FsReader
 {
 
-	public static boolean scanFile(String filePath,
-										  TurtleDatabase db,
-	                             Set<String> encounteredRootSrcs) throws IOException
+	public static boolean scanFile(
+		String filePath,
+		TurtleDatabase db,
+		Set<String> encounteredRootSrcs) throws IOException
 	{
 		// http://www.exampledepot.com/egs/java.io/GetFiles.html
 
@@ -121,12 +122,12 @@ public class FsReader
 		}
 
 		Track t = new Track(
-				  new SongDigest(title),
-				  new ArtistDigest(artist),
-				  new AlbumDigest(album),
-				  new GenreDigest(genre < 0 ? "" : String.valueOf(genre)),
-				  number,
-				  filePath
+			new SongDigest(title),
+			new ArtistDigest(artist),
+			new AlbumDigest(album),
+			new GenreDigest(genre < 0 ? "" : String.valueOf(genre)),
+			number,
+			filePath
 		);
 		Log.v(Preferences.TAG, "created " + (System.currentTimeMillis() - start) + "ms");
 		boolean added = db.push(t);
@@ -146,7 +147,12 @@ public class FsReader
 		return added;
 	}
 
-	static public List<String> getMediaFilesPaths(String mediaPath, List<? extends FilenameFilter> filters, boolean recursive, boolean getFirstMatch){
+	static public List<String> getMediaFilesPaths(
+		String mediaPath,
+		List<? extends FilenameFilter> filters,
+		boolean recursive,
+		boolean getFirstMatch)
+	{
 
 		List<String> candidates = new ArrayList<String>();
 
@@ -211,13 +217,13 @@ public class FsReader
 		AlbumArtLocation albumArtLocation = OperationExecutor.execute(
 			db,
 			new ReadOperationSqlLite<AlbumArtLocation>(
-			new QuerySqlite<Tables.AlbumArtLocations, Tables.AlbumArtLocations, AlbumArtLocation>(
-				new FieldFilter<Tables.AlbumArtLocations, AlbumArtLocation, String>(
-					Tables.AlbumArtLocations.PATH,
-					Operator.EQ,
-					mediaFileDir),
-				new FirstSqlLite<AlbumArtLocation>(Tables.ALBUM_ART_LOCATIONS, new AlbumArtLocationCreator())
-			))
+				new QuerySqlite<Tables.AlbumArtLocations, Tables.AlbumArtLocations, AlbumArtLocation>(
+					new FieldFilter<Tables.AlbumArtLocations, AlbumArtLocation, String>(
+						Tables.AlbumArtLocations.PATH,
+						Operator.EQ,
+						mediaFileDir),
+					new FirstSqlLite<AlbumArtLocation>(Tables.ALBUM_ART_LOCATIONS, new AlbumArtLocationCreator())
+				))
 		);
 
 		if(albumArtLocation != null)
@@ -278,11 +284,11 @@ public class FsReader
 	final static FileFilter isDIR = new FileFilter()
 	{
 		final String[] IGNORED_DIRS = new String[]{
-				  "/proc/",
-				  "/sys/",
-				  "/system/",
-				  "/proc/",
-				  "/root/",
+			"/proc/",
+			"/sys/",
+			"/system/",
+			"/proc/",
+			"/root/",
 		};
 
 		public boolean accept(File file)

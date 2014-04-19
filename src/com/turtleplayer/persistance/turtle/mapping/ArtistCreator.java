@@ -25,8 +25,8 @@ import com.turtleplayer.persistance.turtle.db.structure.Views;
 
 public class ArtistCreator implements ResultCreator<Views.Artists, ArtistDigest, Cursor>
 {
-    public ArtistDigest create(Cursor source)
-    {
-        return new ArtistDigest(source.getString(source.getColumnIndex(Tables.ArtistsReadable.ARTIST.getName())));
-    }
+	public ArtistDigest create(Cursor source)
+	{
+		return new ArtistDigest(source.getString(source.getColumnIndex(Tables.ArtistsReadable.ARTIST.getName())));
+	}
 }

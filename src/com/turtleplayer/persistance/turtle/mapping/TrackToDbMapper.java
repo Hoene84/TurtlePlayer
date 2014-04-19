@@ -25,11 +25,11 @@ import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 public class TrackToDbMapper implements Mapping<Table, ContentValues, Track>
 {
-    public Table get() {
-        return Tables.TRACKS;
-    }
+	public Table get() {
+		return Tables.TRACKS;
+	}
 
-    public ContentValues create(Track track)
+	public ContentValues create(Track track)
 	{
 		final ContentValues values = new ContentValues();
 

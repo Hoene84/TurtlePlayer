@@ -24,8 +24,8 @@ import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 public class GenreCreator implements ResultCreator<Tables.GenresReadable, GenreDigest, Cursor>
 {
-    public GenreDigest create(Cursor source)
-    {
-        return new GenreDigest(source.getString(source.getColumnIndex(Tables.GenresReadable.GENRE.getName())));
-    }
+	public GenreDigest create(Cursor source)
+	{
+		return new GenreDigest(source.getString(source.getColumnIndex(Tables.GenresReadable.GENRE.getName())));
+	}
 }

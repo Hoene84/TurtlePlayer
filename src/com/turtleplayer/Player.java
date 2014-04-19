@@ -252,13 +252,13 @@ public class Player extends ListActivity
 	{
 		tp = (TurtlePlayer) getApplication();
 		tp.db = new TurtleDatabase( new TurtleDatabaseImpl(tp.getApplicationContext())
-    {
-        @Override
-        public void dbResetted()
-        {
-            tp.db.notifyCleared();
-        }
-    });
+		{
+			@Override
+			public void dbResetted()
+			{
+				tp.db.notifyCleared();
+			}
+		});
 		tp.playlist = new Playlist(tp.getApplicationContext(), tp.db);
 		fileChooser = new FileChooser(FileChooser.Mode.Genre, tp, this)
 		{
@@ -274,7 +274,7 @@ public class Player extends ListActivity
 		standartPlayOrderStrategy = new PlayOrderSorted(tp.db, tp.playlist);
 		shufflePlayOrderStrategy = new PlayOrderRandom(tp.db, tp.playlist);
 		playOrderStrategy = tp.playlist.preferences.get(Keys.SHUFFLE) ?
-				  shufflePlayOrderStrategy : standartPlayOrderStrategy;
+			shufflePlayOrderStrategy : standartPlayOrderStrategy;
 	}
 
 	// ========================================= //
@@ -284,9 +284,9 @@ public class Player extends ListActivity
 	private void SetupButtons()
 	{
 		shuffleButton.setImageDrawable(
-				  tp.playlist.preferences.get(Keys.SHUFFLE) ?
-							 getResources().getDrawable(R.drawable.dice48_active) :
-							 getResources().getDrawable(R.drawable.dice48)
+			tp.playlist.preferences.get(Keys.SHUFFLE) ?
+				getResources().getDrawable(R.drawable.dice48_active) :
+				getResources().getDrawable(R.drawable.dice48)
 		);
 
 		shuffleCheckBox.setChecked(tp.playlist.preferences.get(Keys.SHUFFLE));
@@ -383,7 +383,7 @@ public class Player extends ListActivity
 		shuffleCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener()
 		{
 			public void onCheckedChanged(CompoundButton buttonView,
-												  boolean isChecked)
+										 boolean isChecked)
 			{
 				tp.playlist.preferences.set(Keys.SHUFFLE, isChecked);
 			}
@@ -418,7 +418,7 @@ public class Player extends ListActivity
 			{
 				Intent dirChooserIntent = new Intent(DIR_CHOOSER_ACTION);
 				dirChooserIntent.putExtra(DirChooserConstants.ACTIVITY_PARAM_KEY_DIR_CHOOSER_INITIAL_DIR,
-						  tp.playlist.preferences.getExitstingMediaPath().toString());
+					tp.playlist.preferences.getExitstingMediaPath().toString());
 				Player.this.startActivityForResult(dirChooserIntent, DIR_CHOOSER_REQUEST);
 			}
 		});
@@ -479,7 +479,7 @@ public class Player extends ListActivity
 			}
 
 			public void unpauseRescan(final int alreadyProcessed,
-											  final int toProcess)
+									  final int toProcess)
 			{
 				runOnUiThread(new Runnable()
 				{
@@ -603,7 +603,7 @@ public class Player extends ListActivity
 						public void run()
 						{
 							shuffleButton.setImageDrawable(getResources().getDrawable(
-									  shuffle ? R.drawable.dice48_active : R.drawable.dice48));
+								shuffle ? R.drawable.dice48_active : R.drawable.dice48));
 							shuffleCheckBox.setChecked(shuffle);
 						}
 					});
@@ -678,8 +678,8 @@ public class Player extends ListActivity
 			}
 
 			public void onProgressChanged(SeekBar seekBar,
-													int progress,
-													boolean fromUser)
+										  int progress,
+										  boolean fromUser)
 			{
 				// Needed, Although Blank
 			}
@@ -842,9 +842,9 @@ public class Player extends ListActivity
 
 	@Override
 	protected void onListItemClick(ListView l,
-											 View v,
-											 int position,
-											 long id)
+								   View v,
+								   int position,
+								   long id)
 	{
 		final Track trackSelected = fileChooser.choose((Instance) l.getItemAtPosition(position));
 		if (trackSelected != null)
@@ -909,15 +909,15 @@ public class Player extends ListActivity
 
 	@Override
 	protected void onActivityResult(int requestCode,
-											  int resultCode,
-											  Intent data)
+									int resultCode,
+									Intent data)
 	{
 		if (requestCode == DIR_CHOOSER_REQUEST)
 		{
 			if (resultCode == RESULT_OK)
 			{
 				tp.playlist.preferences.set(Keys.MEDIA_DIR,
-						  data.getStringExtra(DirChooserConstants.ACTIVITY_RETURN_KEY_DIR_CHOOSER_CHOOSED_DIR));
+					data.getStringExtra(DirChooserConstants.ACTIVITY_RETURN_KEY_DIR_CHOOSER_CHOOSED_DIR));
 				mediaDir.setText(tp.playlist.preferences.getExitstingMediaPath().toString());
 				rescan();
 			}

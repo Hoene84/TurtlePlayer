@@ -25,8 +25,8 @@ import com.turtleplayer.persistance.turtle.db.structure.Tables;
 public class SongCreator implements ResultCreator<Tables.SongsReadable, SongDigest, Cursor>
 {
 
-    public SongDigest create(Cursor source)
-    {
-        return new SongDigest(source.getString(source.getColumnIndex(Tables.SongsReadable.TITLE.getName())));
-    }
+	public SongDigest create(Cursor source)
+	{
+		return new SongDigest(source.getString(source.getColumnIndex(Tables.SongsReadable.TITLE.getName())));
+	}
 }

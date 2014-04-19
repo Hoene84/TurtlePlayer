@@ -25,11 +25,11 @@ import com.turtleplayer.persistance.turtle.db.structure.Tables;
 
 public class AlbumArtLoactionToDbMapper implements Mapping<Table, ContentValues, AlbumArtLocation>
 {
-    public Table get() {
-        return Tables.ALBUM_ART_LOCATIONS;
-    }
+	public Table get() {
+		return Tables.ALBUM_ART_LOCATIONS;
+	}
 
-    public ContentValues create(AlbumArtLocation albumArtLocation)
+	public ContentValues create(AlbumArtLocation albumArtLocation)
 	{
 		final ContentValues values = new ContentValues();
 
